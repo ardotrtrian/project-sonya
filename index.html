@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Catch the Yes</title>
+<title>Sonia ♡</title>
 
 <style>
 @keyframes pulse {
@@ -13,17 +13,31 @@
 }
 
   body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ffe6e6, #ffd9ff);
-    overflow: hidden;
-    position: relative;
-    transition: background 2s ease;
-  }
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  position: relative;
+
+  background: linear-gradient(
+    270deg,
+    #FF9A9E,
+    #FAD0C4,
+    #FBC2EB,
+    #FF9A9E
+  );
+  background-size: 600% 600%;
+  animation: romanticGradient 18s ease infinite;
+}
+
+@keyframes romanticGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
   .wrapper {
     text-align: center;
@@ -89,7 +103,7 @@
 <canvas id="canvas"></canvas>
 
 <div class="wrapper">
-  <div id="question">Соня, хочешь быть моим Валентином? 🌹</div>
+  <div id="question">Соня, ты будешь моей Валентиной? 🌹</div>
 
   <div class="buttons">
     <button id="yes">ДА</button>
@@ -101,7 +115,6 @@
 <audio id="violin" src="https://ardotrtrian.github.io/project-sonya/violin.mp3" autoplay loop></audio>
 <audio id="firework" src="https://ardotrtrian.github.io/project-sonya/firework.mp3" autoplay loop></audio>
 
-
 <script>
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
@@ -111,7 +124,7 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let moves = 0;
-const maxMoves = 3;
+const maxMoves = 7;
 let floating = false;
 let peekInterval = null;
 
@@ -293,14 +306,13 @@ yesBtn.addEventListener("click",()=>{
 
 noBtn.addEventListener("click",()=>{
 
-  question.textContent = "TХмм… такой ответ я не принимаю. Попробуешь ещё разок?";
+  question.textContent = "Хмм… такой ответ я не принимаю. Попробуешь ещё разок?";
 
   yesBtn.style.display="none";
   noBtn.style.display="none";
   placeholder.style.display="none";
 
   document.body.style.background = "linear-gradient(135deg,#2b2b2b,#000000)";
-
 
   /* -------------------
      screen shake
@@ -330,7 +342,7 @@ const emojisPerInterval = 10; // reduce a bit for smoother performance
 const rainInterval = setInterval(() => {
   for(let i=0; i<emojisPerInterval; i++){
     const emoji = document.createElement("div");
-    emoji.textContent = "💔😢🥺";
+    emoji.textContent = "💔😢🥺😔😿";
     emoji.style.position = "fixed";
     emoji.style.left = Math.random() * 100 + "vw";
     // Randomize starting point above or slightly inside viewport
@@ -383,7 +395,7 @@ setTimeout(()=>{
     document.body.appendChild(bigYes);
 
     bigYes.onclick = () => {
-      question.textContent = "Ха-ха 😄 Я знал, что ты скажешь ДА. Ты очень смешная, Соня!";
+      question.textContent = "Ха-ха 😄 Смешная ты, Соня! Я и знал, что скажешь ДА";
       document.body.style.background="linear-gradient(135deg,#ffe6e6,#ffccff)";
       bigYes.remove();
 
@@ -403,7 +415,38 @@ setTimeout(()=>{
   }, 10000); // 10 seconds
 });
 
+function spawnBackgroundHeart() {
+  const heart = document.createElement("div");
+  heart.textContent = "❤️";
+
+  heart.style.position = "fixed";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.bottom = "-30px";
+  heart.style.fontSize = 14 + Math.random() * 20 + "px";
+  heart.style.opacity = "0.4";
+  heart.style.pointerEvents = "none";
+  heart.style.zIndex = "0";
+  heart.style.transition = "transform 7s linear, opacity 7s linear";
+
+  document.body.appendChild(heart);
+
+  requestAnimationFrame(() => {
+    heart.style.transform = "translateY(-120vh)";
+    heart.style.opacity = "0";
+  });
+
+  setTimeout(() => heart.remove(), 6000);
+}
+
+/* initial fill so the screen isn't empty */
+for (let i = 0; i < 25; i++) {
+  setTimeout(spawnBackgroundHeart, i * 40);
+}
+
+/* continuous hearts */
+setInterval(spawnBackgroundHeart, 50);
 </script>
+
 
 </body>
 </html>
